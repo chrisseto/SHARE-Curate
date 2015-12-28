@@ -1,0 +1,61 @@
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--2-col"></div>
+  <div class="mdl-cell mdl-cell--8-col">
+
+{{#mdl-card class="title-card wide"}}
+    <div style="margin: 0 auto;">
+      {{mdl-textfield
+        value=query
+        label='Find an author'
+        expandableIcon='search'}}
+      </div>
+  {{#mdl-card-buttons}}
+    {{mdl-button icon='help outline'}}
+  {{/mdl-card-buttons}}
+{{/mdl-card}}
+
+  </div>
+</div>
+<div class="mdl-grid">
+  {{#if authors.isPending}}
+    <div class="mdl-cell mdl-cell--6-col"></div>
+    <div class="mdl-cell mdl-cell--1-col">
+          {{mdl-spinner}}
+    </div>
+  {{else}}
+    <div class="mdl-cell mdl-cell--3-col"></div>
+    <div class="mdl-cell mdl-cell--6-col">
+      {{#if authors.length}}
+      {{#mdl-table class="wide" content=authors.content as |row|}}
+        {{#mdl-table-col}}
+        <div class="icon material-icons" style="
+        background-color: {{colorify row.name}};
+          margin-top: -5px;
+          margin-bottom: 5px;
+          border-radius: 50%;
+          font-size: 48px;
+          padding: 2px;
+          color: #FAFAFA;
+          ">person</div>
+        {{/mdl-table-col}}
+        {{#mdl-table-col label='Name'}}
+          {{truncate row.cName}}
+        {{/mdl-table-col}}
+        {{#mdl-table-col}}
+          {{#link-to 'author' row.id}}
+            {{mdl-button isFloating=false icon='send'}}
+          {{/link-to}}
+        {{/mdl-table-col}}
+      {{/mdl-table}}
+      {{else}}
+        {{#mdl-card class="wide"}}
+        <div style="margin: 0 auto;">
+          <div class="mdl-card__supporting-text">
+            Oh, no! We couldn't find any matching authors.
+          </div>
+        </div>
+        {{/mdl-card}}
+      {{/if}}
+    </div>
+    {{/if}}
+</div>

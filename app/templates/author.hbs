@@ -1,0 +1,42 @@
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--6-col">
+    {{#mdl-card title=authorName class="wide"}}
+  {{#mdl-card-actions}}
+    {{mdl-button text='Submit Changes'}}
+  {{/mdl-card-actions}}
+  {{#mdl-card-buttons}}
+    {{mdl-button icon='share'}}
+  {{/mdl-card-buttons}}
+{{/mdl-card}}
+<br>
+  {{#mdl-card title=model.sourceDocument.title class="wide"}}
+  <div class="mdl-card__supporting-text">
+    {{model.sourceDocument.description}}
+  </div>
+  {{#mdl-card-buttons}}
+    {{mdl-button icon='send'}}
+  {{/mdl-card-buttons}}
+  {{/mdl-card}}
+  </div>
+  <div class="mdl-cell mdl-cell--6-col">
+    {{#mdl-table class="wide" content=possibleMatches as |row|}}
+      {{#mdl-table-col label='Id'}}
+        <div class="icon material-icons" style="
+        background-color: {{colorify row.name}};
+          margin-top: -5px;
+          margin-bottom: 5px;
+          border-radius: 50%;
+          font-size: 48px;
+          padding: 2px;
+          color: #FAFAFA;
+          ">person</div>
+      {{/mdl-table-col}}
+      {{#mdl-table-col label='Name'}}
+        {{row.name}}
+      {{/mdl-table-col}}
+      {{#mdl-table-col label='SameAs'}}
+          {{mdl-switch value=row.match}}
+      {{/mdl-table-col}}
+    {{/mdl-table}}
+  </div>
+</div>
