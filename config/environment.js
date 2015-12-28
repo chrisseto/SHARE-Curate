@@ -2,6 +2,7 @@
 
 module.exports = function(environment) {
   var ENV = {
+    jamURI: 'http://localhost:1212',
     modulePrefix: 'share-curate',
     environment: environment,
     baseURL: '/',
@@ -12,11 +13,18 @@ module.exports = function(environment) {
         // e.g. 'with-controller': true
       }
     },
-
+    sassOptions: {
+      includePaths: ['bower_components/material-design-lite/src']
+    },
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-    }
+    },
+    contentSecurityPolicy: {
+        'font-src': "'self' fonts.gstatic.com fonts.googleapis.com",
+        'style-src': "'self' 'unsafe-inline' fonts.googleapis.com",
+        'connect-src': "'self' localhost:1212",
+    },
   };
 
   if (environment === 'development') {
