@@ -9,9 +9,13 @@ export default DS.Model.extend({
     familyName: DS.attr('string'),
     givenName: DS.attr('string'),
     name: DS.attr('string'),
-    sourceDocument: DS.belongsTo('normalized', {async: true}),
+    // sourceDocument: DS.belongsTo('normalized', {async: true}),
+    researchObjects: DS.hasMany('normalized', {async: true}),
+    researchObjectTitles: DS.attr(),
 
     cName: function() {
-        return (this.get('givenName') + ' ' + this.get('familyName')).replace(/[\.,]/g, '');
+        if (!(this.get('givenName') || this.get('familyName')))
+            return this.get('name');
+        return (this.getWithDefault('givenName', '') + ' ' + this.getWithDefault('familyName', '')).replace(/[\.,]/g, '');
     }.property('givenName', 'familyName')
 });
