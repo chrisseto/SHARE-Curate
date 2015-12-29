@@ -3,6 +3,7 @@ import DS from 'ember-data';
 
 function JSONAPIify(payload) {
     payload.type = 'normalizeds';
+    payload.attributes = payload.attributes.normalized;
     payload.attributes = Object
         .keys(payload.attributes)
         .reduce((acc, key) => {

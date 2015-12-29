@@ -9,13 +9,15 @@ function JSONAPIify(payload) {
             acc[key.dasherize()] = payload.attributes[key];
             return acc;
         }, {});
-    payload.relationships['source-document'] = {
-        links: {
-            self: '/v1/namespaces/SHARE/collections/normalized/documents/' + (payload.attributes['source-document']),
-            related: '/v1/namespaces/SHARE/collections/normalized/documents/' + (payload.attributes['source-document']),
-        }
+    payload.relationships['research-objects'] = {
+        data: payload.attributes['research-objects'].map(doc => ({
+            id: doc.id,
+            title: doc.title,
+            type: 'normalized',
+        }))
     };
-    delete payload.attributes['source-document'];
+    payload.attributes['research-object-titles'] = payload.attributes['research-objects'].map(doc => doc.title);
+    delete payload.attributes['research-objects'];
     return payload;
 }
 
