@@ -1,42 +1,93 @@
 <div class="mdl-grid">
-  <div class="mdl-cell mdl-cell--6-col">
-    {{#mdl-card title=authorName class="wide"}}
-  {{#mdl-card-actions}}
-    {{mdl-button text='Submit Changes'}}
-  {{/mdl-card-actions}}
-  {{#mdl-card-buttons}}
-    {{mdl-button icon='share'}}
-  {{/mdl-card-buttons}}
-{{/mdl-card}}
-<br>
-  {{#mdl-card title=model.sourceDocument.title class="wide"}}
-  <div class="mdl-card__supporting-text">
-    {{model.sourceDocument.description}}
-  </div>
-  {{#mdl-card-buttons}}
-    {{mdl-button icon='send'}}
-  {{/mdl-card-buttons}}
-  {{/mdl-card}}
-  </div>
-  <div class="mdl-cell mdl-cell--6-col">
-    {{#mdl-table class="wide" content=possibleMatches as |row|}}
-      {{#mdl-table-col label='Id'}}
-        <div class="icon material-icons" style="
-        background-color: {{colorify row.name}};
-          margin-top: -5px;
-          margin-bottom: 5px;
-          border-radius: 50%;
-          font-size: 48px;
-          padding: 2px;
-          color: #FAFAFA;
-          ">person</div>
-      {{/mdl-table-col}}
-      {{#mdl-table-col label='Name'}}
-        {{row.name}}
-      {{/mdl-table-col}}
-      {{#mdl-table-col label='SameAs'}}
-          {{mdl-switch value=row.match}}
-      {{/mdl-table-col}}
-    {{/mdl-table}}
+<div class="center mdl-cell mdl-cell--8-col-desktop mdl-cell--12-col-phone mdl-cell--10-col-tablet">
+  <div class="mdl-card mdl-shadow--2dp wide">
+    <div class="mdl-card__title mdl-card--expand">
+      <h2 class="mdl-card__title-text">{{model.name}}</h2>
+    </div>
+    <div class="mdl-card__supporting-text">
+      Here's what we know:
+      <br>
+      <br>
+      Given Name: {{model.givenName}}
+      <br>
+      Family Name: {{model.familyName}}
+      <br>
+      Additional Name: {{model.additionalName}}
+      <br>
+      Contributed To: {{model.researchObjects.firstObject.title}}
+
+    </div>
+    <div class="mdl-card__actions mdl-card--border">
+      Select anyone that could be {{model.name}}
+    </div>
   </div>
 </div>
+</div>
+
+{{#if selectedDocument}}
+  <div class="mdl-grid">
+
+    <div class="center mdl-cell mdl-cell--8-col-desktop mdl-cell--12-col-phone mdl-cell--10-col-tablet">
+
+      {{#mdl-card title=selectedDocument.title class='wide'}}
+        <div class="mdl-card__supporting-text">
+          {{if selectedDocument.description selectedDocument.description "No Description Provided."}}
+          <br>
+          Contributed to by
+          {{#each selectedDocument.contributors as |contrib|}}
+            {{contrib.name}},
+          {{/each}}
+        </div>
+
+        {{#mdl-card-buttons}}
+          {{mdl-button on-click=(action "clear") icon='close'}}
+        {{/mdl-card-buttons}}
+      {{/mdl-card}}
+    </div>
+  </div>
+{{/if}}
+
+<div class="mdl-grid">
+
+  <div class="center mdl-cell mdl-cell--8-col-desktop mdl-cell--12-col-phone mdl-cell--10-col-tablet">
+
+    <table style="table-layout: fixed;" class="wide mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+      <thead>
+        <tr>
+          <th style="width: 5%">Merge</th>
+          <th style="width: 5%"></th>
+          <th style="width: 30%" class="mdl-data-table__cell--non-numeric">Name</th>
+          <th style="widht: 60%">Contributor To</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each possibleMatches as |match|}}
+          <tr>
+            <td>{{mdl-checkbox on-change=(action "selected") contrib=match}}</td>
+            <td>
+              <div class="contrib-icon icon material-icons" style="background-color: {{colorify match.name}};">person</div>
+            </td>
+            <td class="mdl-data-table__cell--non-numeric">{{match.name}}</td>
+            <td style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+              <a {{action "documentSelected" match.researchObjects.firstObject}}>
+                {{match.researchObjects.firstObject.title}}
+              </a>
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<div class="mdl-grid">
+    {{#mdl-button isRaised=true on-click=(action "submit") class='center mdl-cell mdl-cell--8-col-desktop mdl-cell--12-col-phone mdl-cell--10-col-tablet'}}
+      {{#if disableSubmit}}
+        Oh, no! There are no matches
+      {{else}}
+        Yep, that's all of them
+      {{/if}}
+    {{/mdl-button}}
+</div>
+

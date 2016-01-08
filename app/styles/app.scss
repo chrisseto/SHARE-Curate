@@ -1,1 +1,48 @@
-@import 'material-design-lite';.wide {  width: 100%;}.title-card > .mdl-card__title {  height: 200px;  background-image: url('/assets/img/share-logo.png');  background-size:     contain;  background-repeat:   no-repeat;  background-position: center center;}body {    height: 100%;    background-color: #FAFAFA;}.curation-application {    background-color: #79D3F4;}.hide-overflow {  overflow-x: hidden;}.dark {  color: #757575;}
+@import "_color-definitions";
+
+$color-primary: $palette-blue-grey-500;
+$color-accent: $palette-blue-A200;
+
+@import 'material-design-lite';
+
+.wide {
+  width: 100%;
+}
+
+.title-card > .mdl-card__title {
+  height: 200px;
+  background-image: url('/assets/img/share-logo.png');
+  background-size:     contain;
+  background-repeat:   no-repeat;
+  background-position: center center;
+}
+
+body {
+    height: 100%;
+    background-color: #FAFAFA;
+}
+
+.curation-application {
+    background-color: #79D3F4;
+}
+
+.hide-overflow {
+  overflow-x: hidden;
+}
+
+.dark {
+  color: #757575;
+}
+
+div#preload {
+   position: absolute;
+   overflow: hidden;
+   left: -9999px; 
+   top: -9999px;
+   height: 1px;
+   width: 1px;
+}
+
+.center {
+  margin: 0 auto;
+}

@@ -1,0 +1,14 @@
+<h1>
+  <div class="contrib-icon icon material-icons" style="background-color: {{colorify contrib.name}};">person</div>
+  {{contrib.name}}
+</h1>
+
+<div class="mdl-grid">
+  {{#each possibleMatches as |match|}}
+    <div class="mdl-cell mdl-cell--4-col">
+      <div class="contrib-icon icon material-icons" style="background-color: {{colorify match.name}};">person</div>
+    </div>
+    <div class="mdl-cell mdl-cell--4-col">{{match.name}}</div>
+    <div class="mdl-cell mdl-cell--4-col">{{mdl-checkbox}}</div>
+  {{/each}}
+</div>

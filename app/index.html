@@ -16,6 +16,10 @@
     {{content-for 'head-footer'}}
   </head>
   <body>
+    <!-- Hack to force images to preload :+1: -->
+    <div id="preload">
+      <img src="/assets/img/share-logo.png" />
+    </div>
     {{content-for 'body'}}
 
     <script src="assets/vendor.js"></script>

@@ -3,7 +3,6 @@ import ENV from 'share-curate/config/environment';
 import Base from 'ember-simple-auth/authenticators/base';
 
 export default Base.extend({
-    // url: 'http://localhost:1212/v1/auth',
     url: `${ENV.jamURI}/v1/auth`,
 
     restore(data) {

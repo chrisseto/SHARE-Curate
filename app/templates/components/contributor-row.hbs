@@ -1,0 +1,29 @@
+{{#if checkbox}}
+  <td>
+    {{mdl-checkbox value=contrib.show}}
+  </td>
+{{/if}}
+
+<td>
+  <div class="contrib-icon icon material-icons" style="background-color: {{colorify contrib.name}};">person</div>
+</td>
+
+<td class="mdl-data-table__cell--non-numeric">
+  {{#link-to 'author' contrib.id}}
+    {{truncate contrib.name}}
+  {{/link-to}}
+</td>
+
+<td class="mdl-data-table__cell--non-numeric">
+  {{#each contrib.researchObjectTitles as |title|}}
+    {{truncate title 50}}
+  {{/each}}
+</td>
+
+{{#if arrow}}
+<td>
+  {{#link-to 'author' contrib.id}}
+    {{mdl-button isFloating=false icon='send'}}
+  {{/link-to}}
+</td>
+{{/if}}

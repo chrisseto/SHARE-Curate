@@ -1,0 +1,43 @@
+<table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+  <thead>
+    <tr>
+      <th></th>
+      <th class="mdl-data-table__cell--non-numeric">Name</th>
+      <th class="mdl-data-table__cell--non-numeric" style="width: 100%">Research Objects</th>
+      <th>Curate</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each contributors as |author|}}
+      <tr>
+        <td>
+          <div class="icon material-icons" style="
+          background-color: {{colorify author.name}};
+          margin-top: -5px;
+          margin-bottom: 5px;
+          border-radius: 50%;
+          font-size: 48px;
+          padding: 2px;
+          color: #FAFAFA;
+          ">person</div>
+        </td>
+        <td class="mdl-data-table__cell--non-numeric">
+          {{truncate author.cName}}
+        </td>
+        <td class="mdl-data-table__cell--non-numeric">
+          <!-- <ul> -->
+          {{#each author.researchObjectTitles as |title|}}
+            <!-- <li>{{title}}</li> -->
+            {{truncate title 50}}
+          {{/each}}
+          <!-- </ul> -->
+        </td>
+        <td>
+          {{#link-to 'author' author.id}}
+            {{mdl-button isFloating=false icon='send'}}
+          {{/link-to}}
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
